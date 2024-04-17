@@ -21,13 +21,29 @@ Use presale value of 60 to get a frequency of 100 Hz
 
 
 // return 0 on success
-// valid frequencies: 0-4095 (not as an input but as an actual value)
+
+/* " fixed frequency individual PWM controller that 
+operates at a programmable frequency from a typical 
+of 40 Hz to 1000 Hz " */
 int setPWMfreq(int frequency) {
+    const double oscillatorClockFreq = 25000000.0; // 25 MHz -> Hz
+
+    // prescaleValue equation:
+    double prescaleCalc = oscillatorClockFreq / (4096.0 * frequency);
+    prescaleCalc = round(prescaleCalc);
+    prescaleCalc -= 1;
+
+    uint8_t prescaleValue = prescaleCalc;
+
+    printf("prescaleValue: %u", prescaleValue);
+
+
     i2cWriteByteData(motorDriverHandle, MODE_REGISTER_1, 0x10); // dissable the ocilator (set it to sleep mode) to 
     // change the pre_scale register (the ocilator's frequency)
 
-    i2cWriteByteData(motorDriverHandle, PRE_SCALE_REGISTER, 0x3C);
-    
+    // uint8_t test = 60; //0x3C;
+    // i2cWriteByteData(motorDriverHandle, PRE_SCALE_REGISTER, test);
+
     // wake up the ocilator after changing value
     i2cWriteByteData(motorDriverHandle, MODE_REGISTER_1, 0x00);
     

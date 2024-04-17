@@ -1,4 +1,4 @@
-LIB = -lpigpio -lrt -lpthread -lc # library chosen for the implementation of PCA9685 
+LIB = -lm -lpigpio -lrt -lpthread -lc # library chosen for the implementation of PCA9685 
 OBJS_O = MotorDriver.o main.o
 CC = gcc
 

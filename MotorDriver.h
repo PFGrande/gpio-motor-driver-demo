@@ -7,5 +7,9 @@
 // sudo i2cdetect -y 1 to find address
 #define HAT_ADDR 0x40
 
-void initMotorDiver();
+void initMotorDriver();
 void terminateMotorDriver();
+
+// not going to be public function, it is only here for testing
+// sudo i2cget -y 1 0x40 0xFE used to see if value has actually been written
+int setPWMfreq(int frequency);

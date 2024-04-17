@@ -9,8 +9,8 @@ int main () {
         printf("pigpio initialization successful\n");
     }
 
-    
-
+    initMotorDiver();
+    setPWMfreq(1);
 
 
 

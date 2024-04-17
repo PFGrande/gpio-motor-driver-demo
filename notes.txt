@@ -1,0 +1,14 @@
+PCA9685 notes:
+Pg 20:
+The bits represent what they enable if you set it to 1
+FULL ON: outputting consistent power
+Pages 15-16 has examples on the duty cycle and shows a graph on what it is doing
+
+Pg. 24, the Pre_scale value is computed. In the PCA code we see that the osc_clock is converted to Hz which is why the number is huge!!!
+
+Pg 2. Example of Pre_cale value and refresh rate of oscillator clock
+
+Frequency of 100 hz: 
+pre_scale value = round(25MHz / [4096 * 100 Hz]) -1 = 60
+
+Use presale value of 60 to get a frequency of 100 Hz

@@ -17,5 +17,6 @@ int main () {
 
 
     // kill pigpio daemon (will not run if program crashes)
+    terminateMotorDriver();
     gpioTerminate();
 }

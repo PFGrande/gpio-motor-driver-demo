@@ -10,7 +10,7 @@ int main () {
     }
 
     initMotorDriver();
-    setPWMfreq(1); // IT WORKED
+    setPWMfreq(100); // IT WORKED
 
 
 

@@ -33,6 +33,7 @@ int setPWMfreq(int frequency) {
     prescaleCalc = round(prescaleCalc);
     prescaleCalc -= 1;
 
+    // convert end result to unsigned int
     uint8_t prescaleValue = prescaleCalc;
 
     printf("prescaleValue: %u", prescaleValue);
@@ -42,7 +43,7 @@ int setPWMfreq(int frequency) {
     // change the pre_scale register (the ocilator's frequency)
 
     // uint8_t test = 60; //0x3C;
-    // i2cWriteByteData(motorDriverHandle, PRE_SCALE_REGISTER, test);
+    i2cWriteByteData(motorDriverHandle, PRE_SCALE_REGISTER, prescaleValue);
 
     // wake up the ocilator after changing value
     i2cWriteByteData(motorDriverHandle, MODE_REGISTER_1, 0x00);

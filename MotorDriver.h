@@ -1,4 +1,5 @@
 #include <pigpio.h>
+#include "Channels.h"
 // the motor hat uses bus 1
 #define I2C_BUS 1
 

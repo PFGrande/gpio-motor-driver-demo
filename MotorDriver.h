@@ -15,3 +15,5 @@ void terminateMotorDriver();
 // not going to be public function, it is only here for testing
 // sudo i2cget -y 1 0x40 0xFE used to see if value has actually been written
 int setPWMfreq(int frequency);
+
+void setPWMDutyCycle(int ledAddress, int dutyCycle);

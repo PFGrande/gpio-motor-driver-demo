@@ -83,3 +83,11 @@ void setPWMDutyCycle(int ledAddress, int dutyCycle) {
 
 // find way to increment the channel
 void setChannelValue(int channel, int value);
+
+// taken from PCM9685 library: PCM9685.c file
+void setPWM(uint8_t channel, uint16_t onTime, uint16_t offTime) {
+    i2cWriteByteData(motorDriverHandle, LED0_ON_L + 4*channel, onTime & 0xFF); 
+    i2cWriteByteData(motorDriverHandle, LED0_ON_H + 4*channel, onTime >> 8);
+    PCA9685_WriteByte(motorDriverHandle, LED0_OFF_L + 4*channel, offTime & 0xFF);
+    PCA9685_WriteByte(motorDriverHandle, LED0_OFF_H + 4*channel, offTime >> 8);
+}

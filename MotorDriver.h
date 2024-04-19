@@ -17,3 +17,5 @@ void terminateMotorDriver();
 int setPWMfreq(int frequency);
 
 void setPWMDutyCycle(int ledAddress, int dutyCycle);
+
+void setChannelValue(int channel, int value);

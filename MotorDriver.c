@@ -3,6 +3,9 @@
 int motorDriverHandle;
 
 void initMotorDriver() {
+    // gpioSetPWMrange(4095); // change the upper bound of the range to 4095,
+    // this won't work, this is for a single pin, not the hat
+    // the hat's range is already 4095
     
     motorDriverHandle = i2cOpen(I2C_BUS, HAT_ADDR, 0);
 }
@@ -76,6 +79,7 @@ void setPWMDutyCycle(int ledAddress, int dutyCycle) {
 
     printf("duty cycle: %u\n", pwmDutyCycle);
 
-
-    
 }
+
+// find way to increment the channel
+void setChannelValue(int channel, int value);

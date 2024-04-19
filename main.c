@@ -11,7 +11,8 @@ int main () {
 
     initMotorDriver();
     setPWMfreq(100); // IT WORKED
-    setPWMDutyCycle(1, 50);
+    setPWMDutyCycle(0, 50);
+    setPWMDutyCycle(0, 0);
 
 
 

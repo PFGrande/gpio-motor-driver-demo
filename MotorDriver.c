@@ -10,6 +10,14 @@ void initMotorDriver() {
     motorDriverHandle = i2cOpen(I2C_BUS, HAT_ADDR, 0);
 }
 
+// taken from PCM9685 library: PCM9685.c file
+void setPWM(uint8_t channel, uint16_t onTime, uint16_t offTime) {
+    i2cWriteByteData(motorDriverHandle, LED0_ON_L + 4*channel, onTime & 0xFF); 
+    i2cWriteByteData(motorDriverHandle, LED0_ON_H + 4*channel, onTime >> 8);
+    i2cWriteByteData(motorDriverHandle, LED0_OFF_L + 4*channel, offTime & 0xFF);
+    i2cWriteByteData(motorDriverHandle, LED0_OFF_H + 4*channel, offTime >> 8);
+}
+
 void terminateMotorDriver() {
     i2cClose(motorDriverHandle);
 }
@@ -72,22 +80,18 @@ void setPWMDutyCycle(int ledAddress, int dutyCycle) {
     // round() caused values to round up. Floor rounds values down.
     dutyPercentage = floor(dutyPercentage);
 
-    uint16_t pwmDutyCycle = dutyPercentage;
+    uint16_t pwmDutyCycle = dutyPercentage - 1;
     
     // uint8_t too small
     // uint8_t pwmDutyCycle = dutyPercentage;
 
     printf("duty cycle: %u\n", pwmDutyCycle);
-
+    setPWM(ledAddress, 0, pwmDutyCycle);
 }
 
 // find way to increment the channel
 void setChannelValue(int channel, int value);
 
-// taken from PCM9685 library: PCM9685.c file
-void setPWM(uint8_t channel, uint16_t onTime, uint16_t offTime) {
-    i2cWriteByteData(motorDriverHandle, LED0_ON_L + 4*channel, onTime & 0xFF); 
-    i2cWriteByteData(motorDriverHandle, LED0_ON_H + 4*channel, onTime >> 8);
-    PCA9685_WriteByte(motorDriverHandle, LED0_OFF_L + 4*channel, offTime & 0xFF);
-    PCA9685_WriteByte(motorDriverHandle, LED0_OFF_H + 4*channel, offTime >> 8);
-}
+
+
+// i2cget -y 1 0x40 0xFE

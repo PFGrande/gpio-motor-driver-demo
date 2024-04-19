@@ -89,8 +89,17 @@ void setPWMDutyCycle(int ledAddress, int dutyCycle) {
     setPWM(ledAddress, 0, pwmDutyCycle);
 }
 
-// find way to increment the channel
-void setChannelValue(int channel, int value);
+// sets the level for a channel
+// this means that there will be no fluxuation in the pulse,
+// just constant power
+// also borrowed from the PCM9685 library
+void setLevel(int channel, int value) {
+    if (value == 1)
+        setPWM(channel, 0, 4095);
+    else
+        setPWM(channel, 0, 0);
+
+}
 
 
 
